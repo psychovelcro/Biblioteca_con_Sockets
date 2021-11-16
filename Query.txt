@@ -1,0 +1,6 @@
+create table BIBLIOTECA(
+id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+ISBN VARCHAR(30), 
+TITULO varchar(20), 
+AUTOR varchar(20), 
+PRECIO double, CONSTRAINT primary_key PRIMARY KEY (id));
