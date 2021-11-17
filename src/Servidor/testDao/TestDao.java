@@ -8,7 +8,7 @@ import Servidor.modelo.entidad.Libro;
 public class TestDao {
 
 	public static void main(String[] args) {
-		Libro libro = new Libro();
+//		Libro libro = new Libro();
 //		libro.setIsbn("978-84-8314");
 //		libro.setTitulo("Codigo Limpio");
 //		libro.setAutor("Robert C. Martin");
@@ -38,7 +38,7 @@ public class TestDao {
 //		libro5.setAutor("David Thomas");
 //		libro5.setPrecio(42.58);
 
-		BibliotecaDaoImpl biblioteca = new BibliotecaDaoImpl();
+//		BibliotecaDaoImpl biblioteca = new BibliotecaDaoImpl();
 
 //		boolean alta = biblioteca.alta(libro5);
 //		if (alta) {
@@ -58,9 +58,22 @@ public class TestDao {
 //
 //		}
 		
-		System.out.println(biblioteca.getByTitle("Codigo Limpio"));
-		System.out.println(biblioteca.getByIsbn("978-84-8317"));
+//		System.out.println(biblioteca.getByTitle("Codigo Limpio"));
+//		System.out.println(biblioteca.getByIsbn("978-84-8317"));
+//		
 		
+//		String bbddresponse = null;
+//		 bbddresponse="3" + "/";
+//		 bbddresponse+="isbn" + ",";
+//		 bbddresponse+="titulo" + ",";
+//		 bbddresponse+="autor" + ",";
+//		 bbddresponse+="precio";
+//		 System.out.println(bbddresponse);
+		
+		
+		String str= "54.95";
+		double num = Double.parseDouble(str);
+		System.out.println(num);
 		
 		
 	}
