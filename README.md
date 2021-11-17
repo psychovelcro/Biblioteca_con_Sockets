@@ -22,7 +22,7 @@ El cliente deberá de recoger todos los datos del usuario y mandarlos al servido
 *********************************************
 Back-Front Com
 
-* Codificacion: 
+					Codificacion: 
 					 * Para hacer un Alta:
 					 alta,isbn,titulo,autor,precio
            
