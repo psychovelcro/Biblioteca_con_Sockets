@@ -48,5 +48,7 @@ Back-Front Com
 					 String = fin
 					 
 					 * Responde con libro o array de libros
-					 * libro = isbn,titulo,autor,precio
+					  String = isbn,titulo,autor,precio
+					  Array = #libros/isbn,titulo,autor,precio
+					 
 					
