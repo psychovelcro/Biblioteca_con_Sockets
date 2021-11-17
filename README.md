@@ -18,3 +18,32 @@ Se pide añadir otra opción que sea “Consultar libros por autor”. En este c
 Se pide añadir otra opción que sea “Añadir libro”. En este caso el cliente pedirá todos los datos del libro y los enviará al servidor para que este lo guarde en el servidor.
 
 El cliente deberá de recoger todos los datos del usuario y mandarlos al servidor en un solo envio.
+
+*********************************************
+Back-Front Com
+
+* Codificacion: 
+					 * Para hacer un Alta:
+					 alta,isbn,titulo,autor,precio
+           
+					 * Para hacer una Baja:
+					 baja,isbn
+           
+					 * Para modificar:
+					 modificar,titulo,autor,precio,sibn
+           
+					 * Para Listar por titulo:
+					 portitulo,titulo
+					 
+					 * Para listar por Autor:
+					 porautor,autor
+					  
+					 * Para listar por isbn:
+					 porisbn,isbn
+					 
+					 * Para listar bbdd completa:
+					 listar
+					 
+					 * Responde con libro o array de libros
+					 * libro = isbn,titulo,autor,precio
+					
