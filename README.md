@@ -24,25 +24,28 @@ Back-Front Com
 
 					Codificacion: 
 					 * Para hacer un Alta:
-					 alta,isbn,titulo,autor,precio
+					 String = alta,isbn,titulo,autor,precio
            
 					 * Para hacer una Baja:
-					 baja,isbn
+					 String = baja,isbn
            
 					 * Para modificar:
-					 modificar,titulo,autor,precio,sibn
+					 String = modificar,titulo,autor,precio,sibn
            
 					 * Para Listar por titulo:
-					 portitulo,titulo
+					 String = portitulo,titulo
 					 
 					 * Para listar por Autor:
-					 porautor,autor
+					 String = porautor,autor
 					  
 					 * Para listar por isbn:
-					 porisbn,isbn
+					 String = porisbn,isbn
 					 
 					 * Para listar bbdd completa:
-					 listar
+					 String = listar
+					 
+					 *Para finalizar comunicación
+					 String = fin
 					 
 					 * Responde con libro o array de libros
 					 * libro = isbn,titulo,autor,precio
