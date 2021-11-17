@@ -12,8 +12,12 @@ public interface BibliotecaDao {
 
 	boolean modificar(Libro libro);
 
-	Libro obtener(int id);
+	Libro getByTitle(String titulo);
+	
+	Libro getByIsbn(String Isbn);
 
 	List<Libro> listar();
+	
+	List <Libro> getByAuthor(String Autor);
 
 }

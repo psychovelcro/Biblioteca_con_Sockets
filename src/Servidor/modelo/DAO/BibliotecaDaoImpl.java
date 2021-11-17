@@ -14,9 +14,9 @@ import Servidor.modelo.entidad.Libro;
 public class BibliotecaDaoImpl implements BibliotecaDao {
 
 	private Connection conexion;
-	private String name, company;
+	private String isbn, titulo, autor;
 	private int id;
-	private double price;
+	private double precio;
 
 	public boolean abrirConexion() {
 		String url = "jdbc:mysql://localhost:3306/Biblioteca";
@@ -74,26 +74,189 @@ public class BibliotecaDaoImpl implements BibliotecaDao {
 
 	@Override
 	public boolean baja(String isbn) {
-		// TODO Auto-generated method stub
-		return false;
+		if (!abrirConexion()) {
+			return false;
+		}
+
+		boolean borrado = true;
+		String query = "delete from BIBLIOTECA where ISBN = ?";
+		try {
+			PreparedStatement ps = conexion.prepareStatement(query);
+
+			ps.setString(1, isbn);
+
+			int numeroFilasAfectadas = ps.executeUpdate();
+			if (numeroFilasAfectadas == 0)
+				borrado = false;
+		} catch (SQLException e) {
+			System.out.println("baja -> No se ha podido dar de baja" + " el libro con isbn: " + isbn);
+			e.printStackTrace();
+		} finally {
+			cerrarConexion();
+		}
+		return borrado;
 	}
 
 	@Override
 	public boolean modificar(Libro libro) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+		if (!abrirConexion()) {
+			return false;
+		}
+		boolean modificado = true;
+		String query = "update Biblioteca set TITULO=?, AUTOR=? " + "PRECIO=? WHERE ISBN=?";
+		try {
+			PreparedStatement ps = conexion.prepareStatement(query);
 
-	@Override
-	public Libro obtener(int id) {
-		// TODO Auto-generated method stub
-		return null;
+			ps.setString(1, libro.getTitulo());
+			ps.setString(2, libro.getAutor());
+			ps.setDouble(3, libro.getPrecio());
+			ps.setString(4, libro.getIsbn());
+
+			int numeroFilasAfectadas = ps.executeUpdate();
+			if (numeroFilasAfectadas == 0)
+				modificado = false;
+			else
+				modificado = true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("modificar -> error al modificar el " + " libro " + libro);
+			modificado = false;
+			e.printStackTrace();
+		} finally {
+			cerrarConexion();
+		}
+
+		return modificado;
 	}
 
 	@Override
 	public List<Libro> listar() {
-		// TODO Auto-generated method stub
-		return null;
+		if (!abrirConexion()) {
+			return null;
+		}
+		Libro libro = null;
+		List<Libro> listaLibros = new ArrayList<>();
+
+		String query = "select ISBN, TITULO, AUTOR, PRECIO from BIBLIOTECA";
+		try {
+			PreparedStatement ps = conexion.prepareStatement(query);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				libro = new Libro();
+				libro.setIsbn(rs.getString(1));
+				libro.setTitulo(rs.getString(2));
+				libro.setAutor(rs.getString(3));
+				libro.setPrecio(rs.getDouble(4));
+
+				listaLibros.add(libro);
+
+			}
+		} catch (SQLException e) {
+			System.out.println("listar -> error al obtener los  " + "videojuegos");
+			e.printStackTrace();
+		} finally {
+			cerrarConexion();
+		}
+
+		return listaLibros;
+	}
+
+	@Override
+	public List<Libro> getByAuthor(String Autor) {
+		if (!abrirConexion()) {
+			return null;
+		}
+		Libro libro = null;
+
+		List<Libro> listaLibros = new ArrayList<>();
+
+		String query = "select ISBN, TITULO, AUTOR, PRECIO from BIBLIOTECA WHERE AUTOR=?";
+		try {
+			PreparedStatement ps = conexion.prepareStatement(query);
+			ps.setString(1, Autor);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				libro = new Libro();
+				libro.setIsbn(rs.getString(1));
+				libro.setTitulo(rs.getString(2));
+				libro.setAutor(rs.getString(3));
+				libro.setPrecio(rs.getDouble(4));
+
+				listaLibros.add(libro);
+			}
+
+		} catch (SQLException e) {
+			System.out.println("obtener -> error al obtener los libros " + "del autor " + autor);
+			e.printStackTrace();
+		} finally {
+			cerrarConexion();
+		}
+
+		return listaLibros;
+	}
+
+	@Override
+	public Libro getByIsbn(String Isbn) {
+		if (!abrirConexion()) {
+			return null;
+		}
+		Libro libro = null;
+
+		String query = "select ISBN, TITULO, AUTOR, PRECIO from BIBLIOTECA WHERE Isbn=?";
+		try {
+			PreparedStatement ps = conexion.prepareStatement(query);
+			ps.setString(1, Isbn);
+
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				libro = new Libro();
+				libro.setIsbn(rs.getString(1));
+				libro.setTitulo(rs.getString(2));
+				libro.setAutor(rs.getString(3));
+				libro.setPrecio(rs.getDouble(4));
+			}
+		} catch (SQLException e) {
+			System.out.println("obtener -> error al obtener el libro con Isbn: " + isbn);
+			e.printStackTrace();
+		} finally {
+			cerrarConexion();
+		}
+
+		return libro;
+	}
+
+	@Override
+	public Libro getByTitle(String titulo) {
+		if (!abrirConexion()) {
+			return null;
+		}
+		Libro libro = null;
+
+		String query = "select ISBN, TITULO, AUTOR, PRECIO from BIBLIOTECA WHERE TITULO=?";
+		try {
+			PreparedStatement ps = conexion.prepareStatement(query);
+			ps.setString(1, titulo);
+
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				libro = new Libro();
+				libro.setIsbn(rs.getString(1));
+				libro.setTitulo(rs.getString(2));
+				libro.setAutor(rs.getString(3));
+				libro.setPrecio(rs.getDouble(4));
+			}
+		} catch (SQLException e) {
+			System.out.println("obtener -> error al obtener el " + "videojuego con id " + id);
+			e.printStackTrace();
+		} finally {
+			cerrarConexion();
+		}
+
+		return libro;
 	}
 
 }
