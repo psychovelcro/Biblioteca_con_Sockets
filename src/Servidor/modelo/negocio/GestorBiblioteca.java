@@ -110,10 +110,11 @@ public class GestorBiblioteca implements Runnable {
 					 * Listar por titulo: portitulo,titulo Para listar por Autor: porautor,autor
 					 * Para listar por isbn: porisbn,isbn Para listar bbdd completa: listar Responde
 					 * con libro o array de libros libro = isbn + titulo + autor + precio
+					 * S
 					 */
 
 					String[] backString = frontString.split(",");
-					String bbddresponse = null;
+					String bbddresponse = "";
 					Libro bbddBookReturned = null;
 					List<Libro> bbddBookList = null;
 
@@ -237,7 +238,6 @@ public class GestorBiblioteca implements Runnable {
 
 						if (bbddBookList != null) {
 
-							bbddresponse = String.valueOf(bbddBookList.size()) + "/";
 
 							for (int i = 0; i < bbddBookList.size(); i++) {
 
@@ -247,6 +247,8 @@ public class GestorBiblioteca implements Runnable {
 								bbddresponse += bbddBookReturned.getTitulo() + ",";
 								bbddresponse += bbddBookReturned.getAutor() + ",";
 								bbddresponse += bbddBookReturned.getPrecio();
+								
+								bbddresponse += i< bbddBookList.size()-1?"/":"";
 
 							}
 							System.out.println("OK.200.");
