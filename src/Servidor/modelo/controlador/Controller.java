@@ -6,6 +6,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 import Servidor.modelo.negocio.GestorBiblioteca;
+import Servidor.modelo.negocio.Hilo_Biblioteca;
 
 public class Controller {
 
@@ -29,7 +30,7 @@ public class Controller {
 				System.out.println("SERVIDOR: peticion numero " + ++peticion + " recibida");
 				// Abrimos un hilo nuevo y liberamos el hilo principal para que pueda
 				// recibir peticiones de otros clientes
-				new GestorBiblioteca(socketAlCliente);
+				new Hilo_Biblioteca(socketAlCliente);
 			}
 		} catch (IOException e) {
 			System.err.println("SERVIDOR: Error de entrada/salida");
