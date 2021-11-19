@@ -10,7 +10,7 @@ public interface BibliotecaDao {
 
 	boolean baja(String isbn);
 
-	boolean modificar(Libro libro);
+	boolean modificar(Libro libro, String isbn);
 
 	Libro getByTitle(String titulo);
 	

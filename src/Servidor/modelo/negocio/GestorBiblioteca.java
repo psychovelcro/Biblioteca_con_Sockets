@@ -46,13 +46,14 @@ public class GestorBiblioteca implements Runnable {
 		return baja;
 	}
 
-	public boolean modificar(Libro libro) {
+	public boolean modificar(Libro libro, String isbn) {
 		if (libro.getIsbn().length() >= 5 && libro.getTitulo().length() >= 5 && libro.getAutor().length() >= 5
 				&& libro.getPrecio() >= 0) {
-			boolean modificar = bibliotecaDao.modificar(libro);
-			return modificar;
-		}
-		return false;
+			bibliotecaDao.modificar(libro, isbn);
+			return true;
+		} else
+			return false;
+
 	}
 
 	public Libro getByTitle(String titulo) {
@@ -61,7 +62,7 @@ public class GestorBiblioteca implements Runnable {
 	}
 
 	public Libro getByIsbn(String Isbn) {
-		Libro libro = bibliotecaDao.getByTitle(Isbn);
+		Libro libro = bibliotecaDao.getByIsbn(Isbn);
 		return libro;
 	}
 
@@ -106,11 +107,10 @@ public class GestorBiblioteca implements Runnable {
 
 					/*
 					 * Codificacion: Para hacer un Alta: alta,isbn,titulo,autor,precio Para hacer
-					 * una Baja: baja,isbn Para modificar: modificar,titulo,autor,precio,sibn Para
+					 * una Baja: baja,isbn Para modificar: modificar,isbn,titulo,autor,precio Para
 					 * Listar por titulo: portitulo,titulo Para listar por Autor: porautor,autor
 					 * Para listar por isbn: porisbn,isbn Para listar bbdd completa: listar Responde
-					 * con libro o array de libros libro = isbn + titulo + autor + precio
-					 * S
+					 * con libro o array de libros libro = isbn + titulo + autor + precio + /
 					 */
 
 					String[] backString = frontString.split(",");
@@ -140,7 +140,7 @@ public class GestorBiblioteca implements Runnable {
 						if (baja(backString[1])) {
 							bbddresponse = "400";
 							System.out.println("400: Bad request. Error en Baja de libro");
-							
+
 						} else {
 							bbddresponse = "200";
 							System.out.println("200: OK. Baja de libro realizada con exito");
@@ -154,14 +154,14 @@ public class GestorBiblioteca implements Runnable {
 						libro.setTitulo(backString[2]);
 						libro.setAutor(backString[3]);
 						libro.setPrecio(Double.parseDouble(backString[4]));
-						modificar(libro);
-						if (modificar(libro)) {
+
+						if (modificar(libro, backString[1])) {
 							bbddresponse = "200";
 							System.out.println("200: OK. Modificacion de libro realizada con exito");
-						} else
+						} else {
 							bbddresponse = "400";
-						System.out.println("400: Bad request. Error en Baja de libro");
-
+							System.out.println("400: Bad request. Error en modificacion de libro");
+						}
 					}
 
 					if (backString[0].equals("portitulo")) {
@@ -193,8 +193,6 @@ public class GestorBiblioteca implements Runnable {
 
 						if (getByAuthor(autor) != null) {
 
-							bbddresponse = String.valueOf(bbddBookList.size()) + "/";
-
 							for (int i = 0; i < bbddBookList.size(); i++) {
 
 								bbddBookReturned = bbddBookList.get(i);
@@ -204,11 +202,14 @@ public class GestorBiblioteca implements Runnable {
 								bbddresponse += bbddBookReturned.getAutor() + ",";
 								bbddresponse += bbddBookReturned.getPrecio();
 
+								bbddresponse += i < bbddBookList.size() - 1 ? "/" : "";
+
 							}
 							System.out.println("OK.200.");
 
 						} else {
 							bbddresponse = "404";
+							System.out.println("404. NOT FOUND");
 						}
 
 					}
@@ -227,7 +228,8 @@ public class GestorBiblioteca implements Runnable {
 							bbddresponse += bbddBookReturned.getPrecio();
 							System.out.println("OK.200.");
 						} else {
-							bbddresponse = "404";
+							bbddresponse = "404. NOT FOUND";
+							System.out.println("404. NOT FOUND");
 						}
 
 					}
@@ -238,7 +240,6 @@ public class GestorBiblioteca implements Runnable {
 
 						if (bbddBookList != null) {
 
-
 							for (int i = 0; i < bbddBookList.size(); i++) {
 
 								bbddBookReturned = bbddBookList.get(i);
@@ -247,13 +248,14 @@ public class GestorBiblioteca implements Runnable {
 								bbddresponse += bbddBookReturned.getTitulo() + ",";
 								bbddresponse += bbddBookReturned.getAutor() + ",";
 								bbddresponse += bbddBookReturned.getPrecio();
-								
-								bbddresponse += i< bbddBookList.size()-1?"/":"";
+
+								bbddresponse += i < bbddBookList.size() - 1 ? "/" : "";
 
 							}
 							System.out.println("OK.200.");
 
 						} else {
+							System.out.println("404. NOT FOUND");
 							bbddresponse = "404";
 						}
 

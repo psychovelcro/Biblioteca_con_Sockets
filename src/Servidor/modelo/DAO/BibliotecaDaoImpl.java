@@ -98,19 +98,19 @@ public class BibliotecaDaoImpl implements BibliotecaDao {
 	}
 
 	@Override
-	public boolean modificar(Libro libro) {
+	public boolean modificar(Libro libro, String isbn) {
 		if (!abrirConexion()) {
 			return false;
 		}
 		boolean modificado = true;
-		String query = "update Biblioteca set TITULO=?, AUTOR=? " + "PRECIO=? WHERE ISBN=?";
+		String query = "update BIBLIOTECA SET TITULO=?, AUTOR=?, PRECIO=? WHERE ISBN='"+isbn+"'";
 		try {
 			PreparedStatement ps = conexion.prepareStatement(query);
 
 			ps.setString(1, libro.getTitulo());
 			ps.setString(2, libro.getAutor());
 			ps.setDouble(3, libro.getPrecio());
-			ps.setString(4, libro.getIsbn());
+			//ps.setString(4, libro.getIsbn());
 
 			int numeroFilasAfectadas = ps.executeUpdate();
 			if (numeroFilasAfectadas == 0)
