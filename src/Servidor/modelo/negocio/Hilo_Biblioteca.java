@@ -1,4 +1,7 @@
 package Servidor.modelo.negocio;
+/*
+ * Author:Juanjo
+ */
 
 import java.io.BufferedReader;
 import java.io.IOException;
