@@ -14,7 +14,7 @@ public class vistaBiblioteca {
 
 		ArrayList<Libro> libros = new ArrayList<Libro>();
 		sock.setChorro(callChorroType);
-		String chorro = sock.enviarChorro();
+		String chorro = sock.enviarChorro(callChorroType);
 		String[] librosInfo = chorro.split("/");
 
 		for (String libro : librosInfo) {
@@ -29,7 +29,7 @@ public class vistaBiblioteca {
 	public static void operationNoReturn(String callChorroType) {
 		
 		sock.setChorro(callChorroType);
-		String chorro = sock.enviarChorro();
+		String chorro = sock.enviarChorro(callChorroType);
 		
 	}
 
@@ -101,6 +101,12 @@ public class vistaBiblioteca {
 		case ELIMINAR_LIB: {
 			
 			operationNoReturn(eliminarLibro());
+
+			break;
+		}
+		case SALIR: {
+			
+			System.exit(0);
 
 			break;
 		}

@@ -39,7 +39,7 @@ public class SocketCliente {
 	}
 
 
-	public String enviarChorro() {
+	public String enviarChorro(String consulta) {
 		System.out.println("        APLICACI�N CLIENTE         ");
 		System.out.println("-----------------------------------");
 
@@ -56,7 +56,7 @@ public class SocketCliente {
 			// Creamos el objeto que nos permite mandar informacion al servidor
 			PrintStream salida = new PrintStream(socketAlServidor.getOutputStream());
 
-			salida.println(chorro);// 3-4
+			salida.println(consulta);// 3-4
 
 			InputStreamReader entrada = new InputStreamReader(socketAlServidor.getInputStream());
 			BufferedReader bf = new BufferedReader(entrada);
