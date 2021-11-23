@@ -23,6 +23,21 @@ public class SocketCliente {
 		this.chorro = chorro;
 		this.respuestaChorro = "";
 	}
+	public SocketCliente() {
+		this.chorro = "";
+		this.respuestaChorro = "";
+	}
+	 
+	
+	public String getRespuestaChorro() {
+		return respuestaChorro;
+	}
+
+
+	public void setChorro(String chorro) {
+		this.chorro = chorro;
+	}
+
 
 	public String enviarChorro() {
 		System.out.println("        APLICACI�N CLIENTE         ");
@@ -32,12 +47,8 @@ public class SocketCliente {
 
 		try (Scanner sc = new Scanner(System.in); Socket socketAlServidor = new Socket()) {
 
-			System.out.println("CLIENTE: Introduzca los numeros a sumar");
-			String numero1 = sc.nextLine();// supongamos el numero 3
-			String numero2 = sc.nextLine();// supongamos el numero 4
-
-			String operandos = numero1 + "-" + numero2;// 3-4
-
+			
+		
 			System.out.println("CLIENTE: Esperando a que el servidor acepte la conexi�n");
 			socketAlServidor.connect(direccionServidor);
 			System.out.println("CLIENTE: Conexion establecida... a " + IP_SERVER + " por el puerto " + PUERTO);
