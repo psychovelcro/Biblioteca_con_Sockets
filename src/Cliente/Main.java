@@ -1,6 +1,7 @@
 package Cliente;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Main {
 	private static ArrayList<String> consultasRandom;
@@ -12,7 +13,7 @@ public class Main {
 		SocketCliente sc= new SocketCliente();
 		
 		for (int i = 0; i < 10; i++) {
-			ClienteHilo cHilo= new ClienteHilo("", sc);
+			ClienteHilo cHilo= new ClienteHilo(consultasRandom.get(randomNumber(0, consultasRandom.size())), sc);
 			Thread c = new Thread(cHilo);
 			c.start();
 		}
@@ -20,11 +21,9 @@ public class Main {
 	}
 
 	
-	private static int randomNumber() {
-		
-		
-		
-		return 0;
+	private static int randomNumber(int low,int high) {
+		Random r = new Random();
+		return r.nextInt(high-low) + low;
 	}
 
 	
