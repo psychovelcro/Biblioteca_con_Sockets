@@ -15,10 +15,12 @@ private  SocketCliente sock;
 	@Override
 	public void run() {
 		
+	String chorro=	sock.enviarChorro(consulta);
 		
-		if(sock.enviarChorro(consulta).length()>5) {
+		
+		if(chorro.length()>5) {
 			System.out.println("Libros obtenidos de la consulta: \n");
-			for (Libro Libro : splitChorro(sock.enviarChorro(consulta))) {
+			for (Libro Libro : splitChorro(chorro)) {
 				
 				System.out.println(Libro.getIsbn()+" | "+Libro.getTitulo()+" | "+Libro.getAutor()+" | "
 						+Libro.getPrecio()+" euros.");
@@ -27,7 +29,7 @@ private  SocketCliente sock;
 			
 		}
 		else {
-			System.out.println("Operacion hecha con exito ("+sock.enviarChorro(consulta)+")");
+			System.out.println("Operacion hecha con exito ("+chorro+")");
 		}
 		
 		

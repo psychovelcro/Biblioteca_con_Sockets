@@ -38,6 +38,8 @@ public class Hilo_Biblioteca implements Runnable {
 		PrintStream salida = null;
 		InputStreamReader entrada = null;
 		BufferedReader entradaBuffer = null;
+		String frontString = "";
+		boolean continuar = true;
 
 		try {
 			// Salida del servidor al cliente
@@ -46,12 +48,13 @@ public class Hilo_Biblioteca implements Runnable {
 			entrada = new InputStreamReader(socketAlCliente.getInputStream());
 			entradaBuffer = new BufferedReader(entrada);
 
-			String frontString = "";
-			boolean continuar = true;
-
 			// Procesaremos entradas hasta que el texto del cliente sea FIN
 			while (continuar) {
 				frontString = entradaBuffer.readLine();
+				
+				if (frontString==null) {
+					break;
+				}
 
 				if (frontString.trim().equalsIgnoreCase("FIN")) {
 					// Mandamos la se�al de "0" para que el cliente sepa que vamos a cortar

@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class SocketCliente {
 
 	// IP y Puerto a la que nos vamos a conectar
-	public static final int PUERTO = 2017;
+	public static final int PUERTO = 2018;
 	public static final String IP_SERVER = "localhost";
 	private String chorro, respuestaChorro;
 
@@ -63,7 +63,7 @@ public class SocketCliente {
 			System.out.println("CLIENTE: Esperando al resultado del servidor...");
 
 			respuestaChorro = bf.readLine();// 7
-			System.out.println("CLIENTE: El resultado de la suma es: " + respuestaChorro);// 7
+		
 
 		} catch (UnknownHostException e) {
 			System.err.println("CLIENTE: No encuentro el servidor en la direcci�n" + IP_SERVER);

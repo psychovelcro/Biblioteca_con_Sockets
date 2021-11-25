@@ -13,7 +13,9 @@ public class Main {
 		SocketCliente sc= new SocketCliente();
 		
 		for (int i = 0; i < 10; i++) {
+			
 			ClienteHilo cHilo= new ClienteHilo(consultasRandom.get(randomNumber(0, consultasRandom.size())), sc);
+			
 			Thread c = new Thread(cHilo);
 			c.start();
 		}
@@ -29,12 +31,12 @@ public class Main {
 	
 	private static void rellenarConsultas() {
 		consultasRandom = new ArrayList<>();
-		consultasRandom.add("");
-		consultasRandom.add("");
-		consultasRandom.add("");
-		consultasRandom.add("");
-		consultasRandom.add("");
-		consultasRandom.add("");
+		consultasRandom.add("listar");
+//		consultasRandom.add("");
+//		consultasRandom.add("");
+//		consultasRandom.add("");
+//		consultasRandom.add("");
+//		consultasRandom.add("");
 
 		
 	}
