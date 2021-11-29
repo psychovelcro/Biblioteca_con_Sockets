@@ -14,7 +14,7 @@ private  SocketCliente sock;
 
 	@Override
 	public void run() {
-		
+		System.out.println("******Hilo con consulta: "+ consulta +" ************");
 	String chorro=	sock.enviarChorro(consulta);
 		
 		
@@ -31,6 +31,7 @@ private  SocketCliente sock;
 		else {
 			System.out.println("Operacion hecha con exito ("+chorro+")");
 		}
+		System.out.println("-----------------------------------------------------");
 		
 		
 		
