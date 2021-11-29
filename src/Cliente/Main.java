@@ -33,8 +33,8 @@ public class Main {
 		consultasRandom = new ArrayList<>();
 		consultasRandom.add("listar");
 		consultasRandom.add("alta,63749-342-223,El pastor,Pedro Sanchez,47.89");
-		consultasRandom.add("baja,63749-342-223");
-		consultasRandom.add("modificar,La cabra 2,Pable henandez,56.8,63749-342-223");
+		consultasRandom.add("baja,465465");
+		consultasRandom.add("modificar,63749-342-223,La cabra 2,Pable henandez,56.8");
 		consultasRandom.add("portitulo,Los 3 cerdos");
 		consultasRandom.add("porautor,Pablo hernandez");
 		consultasRandom.add("porisbn,63749-342-223");
