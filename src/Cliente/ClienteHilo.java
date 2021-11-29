@@ -14,10 +14,15 @@ private  SocketCliente sock;
 
 	@Override
 	public void run() {
+		
+		runone(sock,consulta);
+		
+	}
+	
+	public static  synchronized void runone(SocketCliente sock,String consulta){
+		
 		System.out.println("******Hilo con consulta: "+ consulta +" ************");
-	String chorro=	sock.enviarChorro(consulta);
-		
-		
+		String chorro=	sock.enviarChorro(consulta);
 		if(chorro.length()>5) {
 			System.out.println("Libros obtenidos de la consulta: \n");
 			for (Libro Libro : splitChorro(chorro)) {
@@ -29,12 +34,10 @@ private  SocketCliente sock;
 			
 		}
 		else {
-			System.out.println("Operacion hecha con exito ("+chorro+")");
+			System.out.println(chorro.equals("200")?"Operacion hecha con exito ("+consulta.split(",")[0]+")":
+				"Operacion ERRONEA ("+consulta.split(",")[0]+")");
 		}
 		System.out.println("-----------------------------------------------------");
-		
-		
-		
 		
 		
 		
